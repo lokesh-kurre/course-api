@@ -1,25 +1,32 @@
-package io.godmode.springbootlearning.courseapi.topics;
+package io.godmode.springbootlearning.courseapi.lessons;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import io.godmode.springbootlearning.courseapi.courses.Course;
 
 @Entity
-public class Topic {
+public class Lesson {
 
     @Id
     private String id;
     private String name;
     private String description;
 
-    public Topic() {
+    @ManyToOne
+    private Course course;
+
+    public Lesson() {
 
     }
 
-    public Topic(String id, String name, String description) {
+    public Lesson(String id, String name, String description, String courseId, String topicId) {
         super();
         this.id = id;
         this.name = name;
         this.description = description;
+        this.course = new Course(courseId, "", "", topicId);
     }
 
     public String getId() {
@@ -44,5 +51,13 @@ public class Topic {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 }
